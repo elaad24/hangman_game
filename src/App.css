@@ -12,3 +12,7 @@
 .text_white {
   color: white;
 }
+
+.main {
+  display: flex;
+}

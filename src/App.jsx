@@ -1,6 +1,13 @@
 import { useState } from "react";
 import "./App.css";
+//components
+
 import Header from "./components/header";
+import Pic from "./components/Pic";
+import GameBanner from "./components/GameBanner";
+import LetterPool from "./components/LetterPool";
+import Praise from "./components/Praise";
+
 function App() {
   // loading - pase when the game initiate and get the woed and
   // replace pic ans letters
@@ -13,11 +20,20 @@ function App() {
   const [gameOver, setGameOver] = useState(true);
   const [errors, setErrors] = useState(0);
   const [usedLetters, setUsedLetters] = useState([]);
-  const [secretWord, setSecretWord] = useState(null);
+  const [secretWord, setSecretWord] = useState(undefined);
+  const [gameResult, setGameResult] = useState(null);
 
   return (
     <div className="">
       <Header />
+      <div className="main">
+        <Pic lvl={errors} />
+        <div>
+          <Praise secret={secretWord} />
+          <LetterPool usedLetters={usedLetters} />
+          <GameBanner gameResult={gameResult} />
+        </div>
+      </div>
     </div>
   );
 }
