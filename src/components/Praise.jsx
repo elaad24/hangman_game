@@ -7,6 +7,7 @@ const Praise = ({ secret, usedLetters }) => {
 
   // split the sentense
   const splitSecret = secret.split("");
+  console.log(splitSecret);
 
   // replace the spacese with the minus
   /* for (let i = 0; i <= splitSecret.length; i++) {
@@ -33,9 +34,9 @@ const Praise = ({ secret, usedLetters }) => {
           if (usedLetters.indexOf(SecretLetter) >= 0) {
             if (SecretLetter !== " ") {
               return <div className="secretLetter">{SecretLetter}</div>;
-            } else if (SecretLetter === " ") {
-              return <div>{SecretLetter}</div>;
             }
+          } else if (SecretLetter == " ") {
+            return <div className="wordGap"> </div>;
           } else {
             return (
               <div className="secretLetter">
