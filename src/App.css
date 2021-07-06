@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  background-color: rgb(10, 58, 66);
+  border-radius: 10px;
+}
+
+.text_white {
+  color: white;
+}
