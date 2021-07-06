@@ -23,6 +23,13 @@ function App() {
   const [secretWord, setSecretWord] = useState("abc cdef fght");
   const [gameResult, setGameResult] = useState(null);
 
+  //functions
+
+  const chooseLetter = (e) => {
+    console.log("v");
+    console.log(e.target.value);
+  };
+
   return (
     <div className="">
       <Header />
@@ -30,7 +37,7 @@ function App() {
         <Pic lvl={errors} />
         <div>
           <Praise secret={secretWord} usedLetters={usedLetters} />
-          <LetterPool usedLetters={usedLetters} />
+          <LetterPool usedLetters={usedLetters} callBack={chooseLetter} />
           <GameBanner gameResult={gameResult} />
         </div>
       </div>

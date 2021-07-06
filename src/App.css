@@ -25,3 +25,19 @@
 .wordGap {
   margin: 0 8px;
 }
+
+.letterPool {
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 60%;
+  gap: 10px;
+  margin-left: 25%;
+  justify-content: center;
+}
+.letter {
+  width: 50px;
+  height: 50px;
+  border-radius: 20px;
+}
