@@ -19,8 +19,8 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [gameOver, setGameOver] = useState(true);
   const [errors, setErrors] = useState(0);
-  const [usedLetters, setUsedLetters] = useState([]);
-  const [secretWord, setSecretWord] = useState(undefined);
+  const [usedLetters, setUsedLetters] = useState(["a", "f"]);
+  const [secretWord, setSecretWord] = useState("abc cdef fght");
   const [gameResult, setGameResult] = useState(null);
 
   return (
@@ -29,7 +29,7 @@ function App() {
       <div className="main">
         <Pic lvl={errors} />
         <div>
-          <Praise secret={secretWord} />
+          <Praise secret={secretWord} usedLetters={usedLetters} />
           <LetterPool usedLetters={usedLetters} />
           <GameBanner gameResult={gameResult} />
         </div>

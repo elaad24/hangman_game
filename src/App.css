@@ -16,3 +16,8 @@
 .main {
   display: flex;
 }
+
+.secretLetter {
+  border-bottom: black solid 2px;
+  margin: 0 3px;
+}
