@@ -33,7 +33,12 @@ const LetterPool = ({ usedLetters, callBack }) => {
     <div className="letterPool">
       {Letters.map((letter) => {
         return (
-          <button className="letter " value={letter} onClick={callBack}>
+          <button
+            className="letter "
+            disabled={usedLetters.indexOf(letter) !== -1}
+            value={letter}
+            onClick={callBack}
+          >
             {letter}
           </button>
         );

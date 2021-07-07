@@ -19,15 +19,15 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [gameOver, setGameOver] = useState(true);
   const [errors, setErrors] = useState(0);
-  const [usedLetters, setUsedLetters] = useState(["a", "f"]);
+  const [usedLetters, setUsedLetters] = useState(["b"]);
   const [secretWord, setSecretWord] = useState("abc cdef fght");
   const [gameResult, setGameResult] = useState(null);
 
   //functions
 
   const chooseLetter = (e) => {
-    console.log("v");
     console.log(e.target.value);
+    setUsedLetters([...usedLetters, e.target.value]);
   };
 
   return (
