@@ -22,9 +22,9 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [gameOver, setGameOver] = useState(true);
   const [errors, setErrors] = useState(0);
-  const [usedLetters, setUsedLetters] = useState(["b"]);
-  const [secretWord, setSecretWord] = useState("abc cdef fght");
-  const [gameResult, setGameResult] = useState(null);
+  const [usedLetters, setUsedLetters] = useState([""]);
+  const [secretWord, setSecretWord] = useState("");
+  const [gameResult, setGameResult] = useState(undefined);
   const [missingLetters, setMissingLetters] = useState(null);
 
   //functions
@@ -53,8 +53,10 @@ function App() {
     setGameOver(false);
     setErrors(0);
     setSecretWord(chooseTitle);
+    setUsedLetters([]);
     chooseSeenLetters();
     setGameResult(null);
+    setLoading(false);
   };
 
   const mainFanction = (e) => {
@@ -82,8 +84,8 @@ function App() {
         <div>
           <Praise secret={secretWord} usedLetters={usedLetters} />
           <LetterPool usedLetters={usedLetters} callBack={mainFanction} />
-          <GameBanner gameResult={gameResult} callback={startGame} />
         </div>
+        <GameBanner gameResult={gameResult} callback={startGame} />
       </div>
     </div>
   );
