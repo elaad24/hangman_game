@@ -25,9 +25,20 @@ function App() {
 
   //functions
 
-  const chooseLetter = (e) => {
-    console.log(e.target.value);
+  const mainFanction = (e) => {
+    //add the chosen letter to usedLetters
     setUsedLetters([...usedLetters, e.target.value]);
+    // check if the chhosen letter in the secret praise
+    // and if not add "bad" point to player
+    if (secretWord.split("").indexOf(e.target.value) === -1) {
+      setErrors(errors + 1);
+    }
+    // check if the user lose the game
+    if (errors >= 5) {
+      setGameOver(true);
+      console.log("game over ");
+      return gameOver;
+    }
   };
 
   return (
@@ -37,7 +48,7 @@ function App() {
         <Pic lvl={errors} />
         <div>
           <Praise secret={secretWord} usedLetters={usedLetters} />
-          <LetterPool usedLetters={usedLetters} callBack={chooseLetter} />
+          <LetterPool usedLetters={usedLetters} callBack={mainFanction} />
           <GameBanner gameResult={gameResult} />
         </div>
       </div>
