@@ -1,5 +1,8 @@
 import { useState } from "react";
 import "./App.css";
+
+import list from "./movies.json";
+
 //components
 
 import Header from "./components/header";
@@ -22,8 +25,37 @@ function App() {
   const [usedLetters, setUsedLetters] = useState(["b"]);
   const [secretWord, setSecretWord] = useState("abc cdef fght");
   const [gameResult, setGameResult] = useState(null);
+  const [missingLetters, setMissingLetters] = useState(null);
 
   //functions
+
+  const chooseTitle = () => {
+    return list[Math.round(Math.random() * Math.random() * 100)].title;
+  };
+
+  // choose the letter that the user start with - that he see
+  // set the # of missing letters
+
+  const chooseSeenLetters = () => {
+    // need to fix in futcher to choose from uniq letters
+    const numberOfLetters = Math.round(secretWord.length * 0.25);
+    setMissingLetters(secretWord.length - numberOfLetters);
+    const shffledSecretLetters = secretWord
+      .split("")
+      .sort(() => Math.random() - 0.5);
+    for (let i = 0; i <= numberOfLetters; i++) {
+      setUsedLetters([...(usedLetters + shffledSecretLetters[i])]);
+    }
+  };
+
+  const startGame = () => {
+    setLoading(true);
+    setGameOver(false);
+    setErrors(0);
+    setSecretWord(chooseTitle);
+    chooseSeenLetters();
+    setGameResult(null);
+  };
 
   const mainFanction = (e) => {
     //add the chosen letter to usedLetters
@@ -32,12 +64,13 @@ function App() {
     // and if not add "bad" point to player
     if (secretWord.split("").indexOf(e.target.value) === -1) {
       setErrors(errors + 1);
-    }
+      // subtract from mising letters every time user find correct letter
+    } else setMissingLetters(missingLetters - 1);
     // check if the user lose the game
     if (errors >= 5) {
+      setGameResult("lost");
       setGameOver(true);
       console.log("game over ");
-      return gameOver;
     }
   };
 
@@ -49,7 +82,7 @@ function App() {
         <div>
           <Praise secret={secretWord} usedLetters={usedLetters} />
           <LetterPool usedLetters={usedLetters} callBack={mainFanction} />
-          <GameBanner gameResult={gameResult} />
+          <GameBanner gameResult={gameResult} callback={startGame} />
         </div>
       </div>
     </div>
