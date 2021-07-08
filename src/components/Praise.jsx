@@ -9,13 +9,6 @@ const Praise = ({ secret, usedLetters }) => {
   const splitSecret = secret.split("");
   console.log("splitSecret", splitSecret);
 
-  // replace the spacese with the minus
-  /* for (let i = 0; i <= splitSecret.length; i++) {
-    if (splitSecret[i] == " ") {
-      splitSecret[i] = "-";
-    }
-  } */
-
   for (let i of usedLetters) {
     for (let j = 0; j <= splitSecret.length; j++) {
       if (i == splitSecret[j]) {

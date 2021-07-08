@@ -7,6 +7,10 @@ const GameBanner = ({ gameResult, callback }) => {
         <button className="" onClick={callback}>
           start game{" "}
         </button>
+      ) : GameBanner !== undefined ? (
+        <button className="" onClick={callback}>
+          play again
+        </button>
       ) : (
         ""
       )}

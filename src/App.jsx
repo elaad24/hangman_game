@@ -22,52 +22,62 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [gameOver, setGameOver] = useState(true);
   const [errors, setErrors] = useState(0);
-  const [usedLetters, setUsedLetters] = useState([""]);
+  const [usedLetters, setUsedLetters] = useState([]);
   const [secretWord, setSecretWord] = useState("");
   const [gameResult, setGameResult] = useState(undefined);
   const [missingLetters, setMissingLetters] = useState(null);
 
   //functions
-
-  const chooseTitle = () => {
-    return list[Math.round(Math.random() * Math.random() * 100)].title;
+  // secretPrase - to compensate the time diffrence without unsinq
+  let secretPrase = null;
+  const chooseTitle = async () => {
+    secretPrase = list[Math.round(Math.random() * Math.random() * 100)].title;
+    await setSecretWord(secretPrase.toUpperCase());
   };
 
   // choose the letter that the user start with - that he see
-  // set the # of missing letters
-
-  const chooseSeenLetters = () => {
+  // set the number of missing letters
+  //initiatUsedLetters - temp container to add letter without rerander several time at first
+  let initiatUsedLetters = [];
+  const chooseSeenLetters = async () => {
     // need to fix in futcher to choose from uniq letters
-    const numberOfLetters = Math.round(secretWord.length * 0.25);
-    setMissingLetters(secretWord.length - numberOfLetters);
-    const shffledSecretLetters = secretWord
+    const numberOfLetters = await Math.round(secretPrase.length * 0.25);
+    await setMissingLetters(secretPrase.length - numberOfLetters);
+    const shffledSecretLetters = secretPrase
       .split("")
       .sort(() => Math.random() - 0.5);
     for (let i = 0; i <= numberOfLetters; i++) {
-      setUsedLetters([...(usedLetters + shffledSecretLetters[i])]);
+      initiatUsedLetters.push(shffledSecretLetters[i].toUpperCase());
     }
+    setUsedLetters(initiatUsedLetters);
   };
 
-  const startGame = () => {
-    setLoading(true);
-    setGameOver(false);
-    setErrors(0);
-    setSecretWord(chooseTitle);
-    setUsedLetters([]);
-    chooseSeenLetters();
-    setGameResult(null);
-    setLoading(false);
+  const startGame = async () => {
+    await setLoading(true);
+    await setGameOver(false);
+
+    await setErrors(0);
+    await setUsedLetters([]);
+    initiatUsedLetters = [];
+    secretPrase = null;
+    await chooseTitle();
+    await chooseSeenLetters();
+    await setGameResult(null);
+    await setLoading(false);
   };
 
   const mainFanction = (e) => {
     //add the chosen letter to usedLetters
     setUsedLetters([...usedLetters, e.target.value]);
+
     // check if the chhosen letter in the secret praise
     // and if not add "bad" point to player
+
     if (secretWord.split("").indexOf(e.target.value) === -1) {
       setErrors(errors + 1);
       // subtract from mising letters every time user find correct letter
     } else setMissingLetters(missingLetters - 1);
+
     // check if the user lose the game
     if (errors >= 5) {
       setGameResult("lost");
@@ -80,12 +90,17 @@ function App() {
     <div className="">
       <Header />
       <div className="main">
-        <Pic lvl={errors} />
-        <div>
-          <Praise secret={secretWord} usedLetters={usedLetters} />
-          <LetterPool usedLetters={usedLetters} callBack={mainFanction} />
-        </div>
-        <GameBanner gameResult={gameResult} callback={startGame} />
+        {!gameOver ? (
+          <>
+            <Pic lvl={errors} />
+            <div>
+              <Praise secret={secretWord} usedLetters={usedLetters} />
+              <LetterPool usedLetters={usedLetters} callBack={mainFanction} />
+            </div>
+          </>
+        ) : (
+          <GameBanner gameResult={gameResult} callback={startGame} />
+        )}
       </div>
     </div>
   );
