@@ -19,7 +19,7 @@ const Praise = ({ secret, usedLetters }) => {
   splitSecret.filter((letter) => letter != usedLetters);
 
   return (
-    <div className="main mt5">
+    <div className="praise">
       {splitSecret.map((SecretLetter) => {
         {
           if (usedLetters.indexOf(SecretLetter) >= 0) {

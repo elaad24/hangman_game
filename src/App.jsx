@@ -27,7 +27,14 @@ function App() {
   const [gameResult, setGameResult] = useState(undefined);
   const [missingLetters, setMissingLetters] = useState(null);
 
-  useEffect(() => {});
+  useEffect(async () => {
+    if (missingLetters == 0) {
+      await setLoading(true);
+      await setGameResult("win");
+      await setLoading(false);
+      return await setGameOver(true);
+    }
+  }, [missingLetters]);
 
   //functions
   // secretPrase - to compensate the time diffrence without unsinq
@@ -99,12 +106,6 @@ function App() {
       console.log("game over ");
       await setLoading(false);
     }
-    if (missingLetters == 0) {
-      await setLoading(true);
-      await setGameResult("win");
-      await setGameOver(true);
-      await setLoading(false);
-    }
   };
 
   return (
@@ -114,10 +115,19 @@ function App() {
         {!gameOver ? (
           <>
             <Pic lvl={errors} />
-            <div>
+            <div className="praiseAndPool">
               <Praise secret={secretWord} usedLetters={usedLetters} />
               <LetterPool usedLetters={usedLetters} callBack={mainFanction} />
             </div>
+          </>
+        ) : gameOver && usedLetters.length !== 0 ? (
+          <>
+            <Pic lvl={errors} />
+            <div className="praiseAndPool">
+              <Praise secret={secretWord} usedLetters={usedLetters} />
+              <LetterPool usedLetters={usedLetters} callBack={mainFanction} />
+            </div>
+            <GameBanner gameResult={gameResult} callback={startGame} />
           </>
         ) : (
           <GameBanner gameResult={gameResult} callback={startGame} />

@@ -7,6 +7,9 @@
 .header {
   background-color: rgb(10, 58, 66);
   border-radius: 10px;
+  text-align: center;
+  font-size: large;
+  letter-spacing: 3px;
 }
 
 .text_white {
@@ -31,10 +34,17 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 60%;
+  width: 62%;
   gap: 10px;
   margin-left: 25%;
   justify-content: center;
+}
+
+.letterPool button {
+  border-radius: 50%;
+  font-size: 2em;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 .letter {
   width: 50px;
@@ -44,4 +54,230 @@
 
 .mt5 {
   margin-top: 20px;
+}
+
+.gameBanner {
+  height: 95vh;
+  padding: 20px;
+  width: 25%;
+}
+
+.gameBanner > button {
+  align-items: baseline;
+}
+
+.btn {
+  width: 220px;
+  height: 120px;
+  color: white;
+  background-color: rgba(25, 25, 233, 0.767);
+  border-radius: 20%;
+  font-size: 3em;
+}
+
+.txt_lose {
+  color: rgb(221, 71, 71);
+  font-size: 5em;
+  text-align: center;
+  margin: 100px 0;
+}
+.txt_win {
+  color: rgb(55, 201, 10);
+  font-size: 5em;
+  text-align: center;
+  margin: 100px 0;
+}
+
+.picContainer {
+  width: 25%;
+  height: 80vh;
+  padding: 30px;
+}
+
+.img {
+  width: 90%;
+  height: 90%;
+}
+
+.praiseAndPool {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.praise {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  font-size: 2em;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+@media (max-width: 800px) and (min-width: 400px) {
+  .main {
+    display: block;
+  }
+  .picContainer {
+    width: auto;
+    height: auto;
+    padding: 30px;
+    margin-left: 27%;
+  }
+  .img {
+    width: auto;
+    height: auto;
+  }
+  .praiseAndPool {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .letterPool {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: auto;
+    gap: 8px;
+    margin-left: 0;
+    justify-content: center;
+  }
+
+  .letterPool button {
+    border-radius: 50%;
+    font-size: 1.3em;
+  }
+  .letter {
+    width: 35px;
+    height: 35px;
+    border-radius: 20px;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+  }
+  .praise {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    font-size: 1.3em;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+  }
+  .gameBanner {
+    height: auto;
+    padding: 20px;
+    width: auto;
+  }
+
+  .gameBanner > button {
+    align-items: center;
+  }
+
+  .txt_lose {
+    color: rgb(221, 71, 71);
+    font-size: 2em;
+    text-align: center;
+    margin: 20px 0;
+  }
+  .txt_win {
+    color: rgb(55, 201, 10);
+    font-size: 2em;
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  .btn {
+    width: 120px;
+    height: 90px;
+    color: white;
+    background-color: rgba(25, 25, 233, 0.767);
+    border-radius: 20%;
+    font-size: 2em;
+    margin-left: 30%;
+  }
+}
+@media (max-width: 399px) and (min-width: 100px) {
+  .main {
+    display: block;
+  }
+  .picContainer {
+    width: auto;
+    height: auto;
+    padding: 30px;
+    margin-left: 27%;
+  }
+  .img {
+    width: 50%;
+    height: 50%;
+  }
+  .praiseAndPool {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .letterPool {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: auto;
+    gap: 8px;
+    margin-left: 0;
+    justify-content: center;
+  }
+
+  .letterPool button {
+    border-radius: 50%;
+    font-size: 1em;
+  }
+  .letter {
+    width: 35px;
+    height: 35px;
+    border-radius: 20px;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+  }
+  .praise {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+    font-size: 1em;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+  }
+  .gameBanner {
+    height: auto;
+    padding: 20px;
+    width: auto;
+  }
+
+  .gameBanner > button {
+    align-items: center;
+  }
+
+  .txt_lose {
+    color: rgb(221, 71, 71);
+    font-size: 2em;
+    text-align: center;
+    margin: 20px 0;
+  }
+  .txt_win {
+    color: rgb(55, 201, 10);
+    font-size: 2em;
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  .btn {
+    width: 120px;
+    height: 90px;
+    color: white;
+    background-color: rgba(25, 25, 233, 0.767);
+    border-radius: 20%;
+    font-size: 2em;
+    margin-left: 30%;
+  }
 }

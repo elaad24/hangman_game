@@ -34,8 +34,8 @@ const Pic = ({ lvl }) => {
       break;
   }
   return (
-    <div>
-      <img src={activePic} alt="" />
+    <div className="picContainer">
+      <img className="img" src={activePic} alt="" />
     </div>
   );
 };
