@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 import list from "./movies.json";
@@ -27,6 +27,8 @@ function App() {
   const [gameResult, setGameResult] = useState(undefined);
   const [missingLetters, setMissingLetters] = useState(null);
 
+  useEffect(() => {});
+
   //functions
   // secretPrase - to compensate the time diffrence without unsinq
   let secretPrase = null;
@@ -40,15 +42,27 @@ function App() {
   //initiatUsedLetters - temp container to add letter without rerander several time at first
   let initiatUsedLetters = [];
   const chooseSeenLetters = async () => {
+    // search for the uniq letters from the secretPrase
+
+    let uniqLetters = [];
+    for (let i of secretPrase.toUpperCase().split("")) {
+      if (uniqLetters.indexOf(i) == -1 && i.match(/^\S*$/)) {
+        uniqLetters.push(i);
+      }
+    }
+    console.log(uniqLetters);
     // need to fix in futcher to choose from uniq letters
-    const numberOfLetters = await Math.round(secretPrase.length * 0.25);
-    await setMissingLetters(secretPrase.length - numberOfLetters);
-    const shffledSecretLetters = secretPrase
-      .split("")
-      .sort(() => Math.random() - 0.5);
-    for (let i = 0; i <= numberOfLetters; i++) {
+
+    const numberOfSeenLetters = await Math.round(uniqLetters.length * 0.25);
+    console.log("number of uniq letter", uniqLetters.length);
+    console.log("number of seen letter", numberOfSeenLetters);
+
+    await setMissingLetters(uniqLetters.length - numberOfSeenLetters);
+    const shffledSecretLetters = uniqLetters.sort(() => Math.random() - 0.5);
+    for (let i = 0; i < numberOfSeenLetters; i++) {
       initiatUsedLetters.push(shffledSecretLetters[i].toUpperCase());
     }
+    console.log("initiatUsedLetters", initiatUsedLetters);
     setUsedLetters(initiatUsedLetters);
   };
 
@@ -66,23 +80,30 @@ function App() {
     await setLoading(false);
   };
 
-  const mainFanction = (e) => {
+  const mainFanction = async (e) => {
     //add the chosen letter to usedLetters
     setUsedLetters([...usedLetters, e.target.value]);
 
-    // check if the chhosen letter in the secret praise
+    // check if the choosen letter in the secret praise
     // and if not add "bad" point to player
 
     if (secretWord.split("").indexOf(e.target.value) === -1) {
       setErrors(errors + 1);
-      // subtract from mising letters every time user find correct letter
     } else setMissingLetters(missingLetters - 1);
 
     // check if the user lose the game
     if (errors >= 5) {
-      setGameResult("lost");
-      setGameOver(true);
+      await setLoading(true);
+      await setGameResult("lost");
+      await setGameOver(true);
       console.log("game over ");
+      await setLoading(false);
+    }
+    if (missingLetters == 0) {
+      await setLoading(true);
+      await setGameResult("win");
+      await setGameOver(true);
+      await setLoading(false);
     }
   };
 
